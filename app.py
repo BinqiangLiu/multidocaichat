@@ -75,9 +75,6 @@ with st.sidebar:
             with open(file_path, 'wb') as f:
                 f.write(pdf_file.read())
             st.success(f"File '{pdf_file.name}' saved successfully.")
-#    else:
-#        st.write("Upload your document first.")
-#        st.stop()    
     
 try:
     documents = SimpleDirectoryReader(directory_path).load_data()
@@ -107,8 +104,7 @@ while True:
     try:
         question = st.text_input("Enter your query here:")
         print("Your query:\n"+question)
-        if question.strip().isspace() or question == "" or question.strip() == "" or question.isspace():
-            st.write("Query Empty. Please enter valid query first.")
+        if question.strip().isspace() or question == "" or question.strip() == "" or question.isspace():            
             break        
         elif question=="exit":
             break
