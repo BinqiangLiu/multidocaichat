@@ -60,8 +60,7 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-with st.sidebar:
-    st.subheader("Enjoy chatting with your docs.")
+with st.sidebar:    
     pdf_files = st.file_uploader("Choose your PDF Files and Press OK", type=['pdf'], accept_multiple_files=True)
     if pdf_files:
         os.makedirs(directory_path)
@@ -70,7 +69,16 @@ with st.sidebar:
             with open(file_path, 'wb') as f:
                 f.write(pdf_file.read())
             st.success(f"File '{pdf_file.name}' saved successfully.")
-
+    else:
+        st.write("Upload your document first.")
+        st.stop()
+    st.write("Disclaimer: This app is for information purpose only. NO liability could be claimed against whoever associated with this app in any manner. User should consult a qualified legal professional for legal advice.")
+    st.sidebar.markdown("Contact: [aichat101@foxmail.com](mailto:aichat101@foxmail.com)")
+    st.sidebar.markdown('WeChat: <span class="blue-underline">pat2win</span>, or scan the code below.', unsafe_allow_html=True)
+    st.image(wechat_image)
+    st.sidebar.markdown('<span class="blue-underline">Life Enhancing with AI.</span>', unsafe_allow_html=True)      
+    st.subheader("Enjoy chatting!")
+    
 try:
     documents = SimpleDirectoryReader(directory_path).load_data()
 except Exception as e:
