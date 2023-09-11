@@ -32,6 +32,34 @@ def generate_random_string(length):
 random_string = generate_random_string(20)
 directory_path=random_string
 
+wechat_image= "WeChatCode.jpg"
+
+st.sidebar.markdown(
+    """
+    <style>
+    .blue-underline {
+        text-decoration: bold;
+        color: blue;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    """
+    <style>
+        [data-testid=stSidebar] [data-testid=stImage]{
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+    </style>
+    """, unsafe_allow_html=True
+)
+
 with st.sidebar:
     st.subheader("Enjoy chatting with your docs.")
     pdf_files = st.file_uploader("Choose your PDF Files and Press OK", type=['pdf'], accept_multiple_files=True)
