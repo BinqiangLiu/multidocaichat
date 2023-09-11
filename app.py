@@ -48,9 +48,6 @@ try:
 except Exception as e:
     print("waiting for path creation.")
 
-# Load documents from a directory
-#documents = SimpleDirectoryReader('data').load_data()
-
 embed_model = LangchainEmbedding(HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2'))
 
 llm_predictor = LLMPredictor(HuggingFaceHub(repo_id="HuggingFaceH4/starchat-beta", model_kwargs={"min_length":100, "max_new_tokens":1024, "do_sample":True, "temperature":0.2,"top_k":50, "top_p":0.95, "eos_token_id":49155}))
@@ -80,6 +77,7 @@ while True:
         elif question=="exit":
             break
         elif question!="":
+          with st.spinner("AI Thinking...Please wait a while to Cheers!"):
             initial_response = query_engine.query(question)
             temp_ai_response=str(initial_response)
             final_ai_response=temp_ai_response.partition('<|end|>')[0]             
