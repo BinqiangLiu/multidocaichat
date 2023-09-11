@@ -78,6 +78,16 @@ with st.sidebar:
     st.image(wechat_image)
     st.sidebar.markdown('<span class="blue-underline">Life Enhancing with AI.</span>', unsafe_allow_html=True)      
     st.subheader("Enjoy chatting!")
+    if pdf_files:
+        os.makedirs(directory_path)
+        for pdf_file in pdf_files:
+            file_path = os.path.join(directory_path, pdf_file.name)
+            with open(file_path, 'wb') as f:
+                f.write(pdf_file.read())
+            st.success(f"File '{pdf_file.name}' saved successfully.")
+    else:
+        st.write("Upload your document first.")
+        st.stop()    
     
 try:
     documents = SimpleDirectoryReader(directory_path).load_data()
