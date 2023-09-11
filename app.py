@@ -4,7 +4,6 @@ from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from llama_index import LangchainEmbedding, ServiceContext
 from llama_index import StorageContext, load_index_from_storage
 from llama_index import LLMPredictor
-#from transformers import HuggingFaceHub
 from langchain import HuggingFaceHub
 from streamlit.components.v1 import html
 from pathlib import Path
@@ -49,7 +48,6 @@ try:
 except Exception as e:
     print("waiting for path creation.")
 
-
 # Load documents from a directory
 #documents = SimpleDirectoryReader('data').load_data()
 
@@ -76,25 +74,15 @@ while True:
     try:
         question = st.text_input("Enter your query here:")
         print("Your query:\n"+question)
-        if question.strip().isspace():
+        if question.strip().isspace() or question == "" or question.strip() == "" or question.isspace():
             st.write("Query Empty. Please enter valid query first.")
-            break
-        elif question == "":
-#            st.write("Query Empty. Please enter valid query first.")
-            break
-        elif question.strip() == "":
-            st.write("Query Empty. Please enter valid query first.")
-            break
-        elif question.isspace():
-            st.write("Query Empty. Please enter valid query first.")
-            break
+            break        
         elif question=="exit":
             break
         elif question!="":
             initial_response = query_engine.query(question)
             temp_ai_response=str(initial_response)
-            final_ai_response=temp_ai_response.partition('<|end|>')[0] 
-            print("AI Response:\n"+final_ai_response)
+            final_ai_response=temp_ai_response.partition('<|end|>')[0]             
             st.write("AI Response:\n\n"+final_ai_response)
     except Exception as e:
         st.stop()
