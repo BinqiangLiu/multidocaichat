@@ -33,7 +33,7 @@ random_string = generate_random_string(20)
 directory_path=random_string
 
 with st.sidebar:
-    st.subheader("Upload your Documents Here: ")
+    st.subheader("Enjoy chatting with your docs.")
     pdf_files = st.file_uploader("Choose your PDF Files and Press OK", type=['pdf'], accept_multiple_files=True)
     if pdf_files:
         os.makedirs(directory_path)
