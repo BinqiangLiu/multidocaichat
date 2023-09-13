@@ -59,6 +59,9 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
+question = st.text_input("Enter your query here:")
+display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check me to get AI Response.")
+
 with st.sidebar:    
     pdf_files = st.file_uploader("Upload file and start AI Doc-Chat.", type=['pdf'], accept_multiple_files=True)
     st.write("Disclaimer: This app is for information purpose only. NO liability could be claimed against whoever associated with this app in any manner. User should consult a qualified legal professional for legal advice.")
@@ -87,9 +90,6 @@ new_index = VectorStoreIndex.from_documents(
     documents,
     service_context=service_context,
 )
-
-question = st.text_input("Enter your query here:")
-display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check me to get AI Response.")
 
 if question !="" and not question.strip().isspace() and not question == "" and not question.strip() == "" and not question.isspace():
     if display_output_text==True:
