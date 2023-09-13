@@ -83,7 +83,9 @@ with st.sidebar:
         sys.exit()
 
 embed_model = LangchainEmbedding(HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2'))
+
 llm_predictor = LLMPredictor(HuggingFaceHub(repo_id="HuggingFaceH4/starchat-beta", model_kwargs={"min_length":100, "max_new_tokens":1024, "do_sample":True, "temperature":0.1,"top_k":50, "top_p":0.95, "eos_token_id":49155}))
+
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, embed_model=embed_model)
 
 new_index = VectorStoreIndex.from_documents(
@@ -104,7 +106,6 @@ if question !="" and not question.strip().isspace() and not question == "" and n
         st.write("AI Response:\n\n"+final_ai_response)
     else:
         print("Check the Checkbox to get AI Response.")
-#        st.write("Check the Checkbox to get AI Response.")      
         sys.exit()          
 else:
     print("Please enter your question first.")
