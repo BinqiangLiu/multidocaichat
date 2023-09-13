@@ -15,8 +15,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-st.set_page_config(page_title="Open AI Doc-Chat Assistant", layout="wide")
-st.subheader("Open AI Doc-Chat Assistant: Life Enhancing with AI!")
+st.set_page_config(page_title="Cheers! Open AI Doc-Chat Assistant", layout="wide")
+st.subheader("Cheers! Open AI Doc-Chat Assistant: Life Enhancing with AI!")
 
 css_file = "main.css"
 with open(css_file) as f:
@@ -89,7 +89,8 @@ new_index = VectorStoreIndex.from_documents(
 )
 
 question = st.text_input("Enter your query here:")
-display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check me to get AI Response.") 
+display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check me to get AI Response.")
+
 if question !="" and not question.strip().isspace() and not question == "" and not question.strip() == "" and not question.isspace():
     if display_output_text==True:
       with st.spinner("AI Thinking...Please wait a while to Cheers!"):
