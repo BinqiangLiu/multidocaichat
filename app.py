@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 st.set_page_config(page_title="Cheers! Open AI Doc-Chat Assistant", layout="wide")
-st.subheader("Cheers! Open AI Doc-Chat Assistant: Life Enhancing with AI!")
+st.subheader("Open AI Doc-Chat Assistant: Life Enhancing with AI!")
 
 css_file = "main.css"
 with open(css_file) as f:
