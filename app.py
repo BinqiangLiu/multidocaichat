@@ -23,6 +23,7 @@ with open(css_file) as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
     
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+repo_id=os.getenv("repo_id")
 
 documents=[]
 wechat_image= "WeChatCode.jpg"
@@ -84,7 +85,7 @@ with st.sidebar:
 
 embed_model = LangchainEmbedding(HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2'))
 
-llm_predictor = LLMPredictor(HuggingFaceHub(repo_id="HuggingFaceH4/starchat-beta", model_kwargs={"min_length":100, "max_new_tokens":1024, "do_sample":True, "temperature":0.1,"top_k":50, "top_p":0.95, "eos_token_id":49155}))
+llm_predictor = LLMPredictor(HuggingFaceHub(repo_id=repo_id, model_kwargs={"min_length":100, "max_new_tokens":1024, "do_sample":True, "temperature":0.1,"top_k":50, "top_p":0.95, "eos_token_id":49155}))
 
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, embed_model=embed_model)
 
