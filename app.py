@@ -24,6 +24,7 @@ with open(css_file) as f:
     
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id=os.getenv("repo_id")
+model_name=os.getenv("model_name")
 
 documents=[]
 wechat_image= "WeChatCode.jpg"
@@ -83,9 +84,16 @@ with st.sidebar:
         print("waiting for path creation.")
         sys.exit()
 
-embed_model = LangchainEmbedding(HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2'))
+embed_model = LangchainEmbedding(HuggingFaceEmbeddings(model_name=model_name))
 
-llm_predictor = LLMPredictor(HuggingFaceHub(repo_id=repo_id, model_kwargs={"min_length":100, "max_new_tokens":1024, "do_sample":True, "temperature":0.1,"top_k":50, "top_p":0.95, "eos_token_id":49155}))
+llm = HuggingFaceHub(repo_id=repo_id,
+                     model_kwargs={"min_length":1024,
+                                   "max_new_tokens":5632, "do_sample":True,
+                                   "temperature":0.1,
+                                   "top_k":50,
+                                   "top_p":0.95, "eos_token_id":49155}) 
+
+llm_predictor = LLMPredictor(llm)
 
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, embed_model=embed_model)
 
@@ -102,9 +110,9 @@ if question !="" and not question.strip().isspace() and not question == "" and n
         loadedindex = load_index_from_storage(storage_context=storage_context, service_context=service_context)
         query_engine = loadedindex.as_query_engine() 
         initial_response = query_engine.query(question)
-        temp_ai_response=str(initial_response)
-        final_ai_response=temp_ai_response.partition('<|end|>')[0]
-        st.write("AI Response:\n\n"+final_ai_response)
+        #temp_ai_response=str(initial_response)
+        #final_ai_response=temp_ai_response.partition('<|end|>')[0]
+        st.write("AI Response:\n\n"+initial_response)
     else:
         print("Check the Checkbox to get AI Response.")
         sys.exit()          
