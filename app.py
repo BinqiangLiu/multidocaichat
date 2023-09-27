@@ -112,7 +112,7 @@ if question !="" and not question.strip().isspace() and not question == "" and n
         initial_response = query_engine.query(question)
         #temp_ai_response=str(initial_response)
         #final_ai_response=temp_ai_response.partition('<|end|>')[0]
-        st.write("AI Response:\n\n"+initial_response)
+        st.write("AI Response:\n\n"+str(initial_response))
     else:
         print("Check the Checkbox to get AI Response.")
         sys.exit()          
